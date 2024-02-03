@@ -10,24 +10,27 @@ import requests
 import shutil
 
 
-tmcurl = "https://www.tuftsmedicine.org/sites/default/files/2024-01/043400617_tuftsmedicalcenter_standardcharges.csv"
-mwhurl = "https://www.tuftsmedicine.org/sites/default/files/2024-01/042767880_melrosewakefieldhospital_standardcharges.csv"
-lghurl = "https://www.tuftsmedicine.org/sites/default/files/2024-01/042103590_lowellgeneralhospital_standardcharges.csv"
-
 title = "Healthcare Cost Transparency Tool"
 
+facilities = []
+allinitials = {}
+allurls = {}
 
 class Hospital:
     def __init__(self, location, url, initials):
+        global facilities
         self.location = location
         self.url = url
         self.initials = initials
+        facilities.append(location)
+        allinitials[location] = initials
+        allurls[location] = url
 
 
 # Add new hospitals here
-tmc = Hospital("Tufts Medical Center", tmcurl, "tmc")
-mwh = Hospital("Melrose Wakefield Hospital", mwhurl, "mwh")
-lgh = Hospital("Lowell General Hospital", lghurl, "lgh") 
+h01 = Hospital("Lowell General Hospital", "https://www.tuftsmedicine.org/sites/default/files/2024-01/042103590_lowellgeneralhospital_standardcharges.csv", "h01") 
+h02 = Hospital("Melrose Wakefield Hospital", "https://www.tuftsmedicine.org/sites/default/files/2024-01/042767880_melrosewakefieldhospital_standardcharges.csv", "h02")
+h03 = Hospital("Tufts Medical Center", "https://www.tuftsmedicine.org/sites/default/files/2024-01/043400617_tuftsmedicalcenter_standardcharges.csv", "h03")
 
 
 def vars(x):
@@ -80,24 +83,14 @@ def start():
     global records
     global facility
     message = "Choose a facility"
-    choices = [lgh.location, mwh.location, tmc.location, "Exit"]
+    choices = facilities
+    choices.append("Exit")
     facility = easygui.buttonbox(message, title, choices)
-    if facility == lgh.location:
-        vars("lgh")
-        url = lgh.url
-        pullfile(url)
-    elif facility == mwh.location:
-        vars("mhw")       
-        url = mwh.url
-        pullfile(url)
-    elif facility == tmc.location:
-        vars("tmc")
-        url = tmc.url
-        pullfile(url)
-    else:
-        exit(0)
+    vars(allinitials[facility])
+    url = allurls[facility]
+    pullfile(url)
+  
         
-
 def load_json_from_csv_file_with_headers(csv_file_path, json_file_path):
     with open(csv_file_path, "r") as csv_file:
         reader = csv.reader(csv_file)
