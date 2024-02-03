@@ -27,10 +27,10 @@ class Hospital:
         allurls[location] = url
 
 
-# Add new hospitals here
-h01 = Hospital("Local General Hospital", "https://www.tuftsmedicine.org/sites/default/files/2024-01/042103590_lowellgeneralhospital_standardcharges.csv", "h01") 
-h02 = Hospital("Big City Hospital", "https://www.tuftsmedicine.org/sites/default/files/2024-01/042767880_melrosewakefieldhospital_standardcharges.csv", "h02")
-h03 = Hospital("ACME Medical Center", "https://www.tuftsmedicine.org/sites/default/files/2024-01/043400617_tuftsmedicalcenter_standardcharges.csv", "h03")
+# Add new hospitals here and point url to yout csv pricelist (open the url below for example formating)
+h01 = Hospital("Local General Hospital", "https://github.com/se7enack/randomfiles/raw/main/hospital1.csv", "h01") 
+h02 = Hospital("Big City Hospital", "https://github.com/se7enack/randomfiles/raw/main/hospital1.csv", "h02")
+h03 = Hospital("ACME Medical Center", "https://github.com/se7enack/randomfiles/raw/main/hospital1.csv", "h03")
 
 
 def vars(x):
