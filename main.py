@@ -28,9 +28,9 @@ class Hospital:
 
 
 # Add new hospitals here
-h01 = Hospital("Lowell General Hospital", "https://www.tuftsmedicine.org/sites/default/files/2024-01/042103590_lowellgeneralhospital_standardcharges.csv", "h01") 
-h02 = Hospital("Melrose Wakefield Hospital", "https://www.tuftsmedicine.org/sites/default/files/2024-01/042767880_melrosewakefieldhospital_standardcharges.csv", "h02")
-h03 = Hospital("Tufts Medical Center", "https://www.tuftsmedicine.org/sites/default/files/2024-01/043400617_tuftsmedicalcenter_standardcharges.csv", "h03")
+h01 = Hospital("Local General Hospital", "https://www.tuftsmedicine.org/sites/default/files/2024-01/042103590_lowellgeneralhospital_standardcharges.csv", "h01") 
+h02 = Hospital("Big City Hospital", "https://www.tuftsmedicine.org/sites/default/files/2024-01/042767880_melrosewakefieldhospital_standardcharges.csv", "h02")
+h03 = Hospital("ACME Medical Center", "https://www.tuftsmedicine.org/sites/default/files/2024-01/043400617_tuftsmedicalcenter_standardcharges.csv", "h03")
 
 
 def vars(x):
@@ -83,9 +83,12 @@ def start():
     global records
     global facility
     message = "Choose a facility"
-    choices = facilities
-    choices.append("Exit")
-    facility = easygui.buttonbox(message, title, choices)
+    facility = easygui.buttonbox(message, title, facilities)
+    happy = bool(facility)
+    if happy == True:
+        pass
+    else:
+        exit(0)      
     vars(allinitials[facility])
     url = allurls[facility]
     pullfile(url)
@@ -143,7 +146,6 @@ def asktype():
         exit(0)
     # k is a list of the column headers  
     k = list(k)
-
     # Remove the first three columns headers ("Cost", "Description", and "Type") so they aren't in the next menu
     # In some cases 'Package/Line_Level' is there, if so it is also removed
     if 'Package/Line_Level' in k:
@@ -156,16 +158,14 @@ def asktype():
     if happy == True:
         pass
     else:
-        exit(0)  
-            
+        exit(0)       
     try:
         # If price is a float make sure it contains 2 decimal points and add "$" prefix
         flt = float(data[record][choice])
         cash = f"{flt:.2f}"
         money = str(f"\n\n\n\n{data[record]['Description']}\n\n\n\nCPT Code: {data[record]['Code']}\n\n\n\n{choice}: ${cash}")
     except:
-        money = data[record][choice]
-        
+        money = data[record][choice]     
     choices = ["Do another", "Quit"]
     p = easygui.buttonbox(money, facility, choices)
     if p == "Do another":
