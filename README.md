@@ -26,9 +26,6 @@ mv Healthcare-Cost-Transparency-Tool.app ~/Applications/.
 ### Demo
 https://github.com/se7enack/Healthcare-Cost-Transparency-Tool/assets/18600808/3ece2f00-2fb0-47f7-8b6b-c564d6465411
 
-
-<video src="https://github.com/se7enack/Healthcare-Cost-Transparency-Tool/assets/18600808/3ece2f00-2fb0-47f7-8b6b-c564d6465411" controls="controls" style="max-width: 730px;"> </video>
-
 <i>*The data used to for this demo is in no way factual. It exists solely to demonstrate the app. The amounts have all been scrambled.</i>
 
 This Price-Transparency tool is licensed under the "MIT License" and it can be viewed here:
